@@ -1,4 +1,5 @@
 import React from "react";
+import UserLists from "./UserLists";
 
 export default class LoginComponent extends React.Component{
 
@@ -36,16 +37,22 @@ export default class LoginComponent extends React.Component{
     }
 
     render() {
-        return (
-        <form onSubmit={this.handleSubmit}>
-            <label>
-            Nome:
-            <input type="text" value={this.state.username} onChange={this.handleChange} />
-            <input type="password" value={this.state.password} onChange={this.handlePassword} />
-            </label>
-            <input type="submit" value="Enviar" />
-        </form>
-        );
+        var token = localStorage.getItem('token');
+        if(!token){
+            return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                Nome:
+                <input type="text" value={this.state.username} onChange={this.handleChange} />
+                <input type="password" value={this.state.password} onChange={this.handlePassword} />
+                </label>
+                <input type="submit" value="Enviar" />
+            </form>
+            );
+        }
+        else{
+            return <UserLists />
+        }
     }
     
       
